@@ -16,6 +16,8 @@ namespace InsertionSortLib {
         public override bool Backward(ref State state) {
             state.SetCurrentSorting(state.CurrentSorting - 1);
             state.SetSortedLenght(state.SortedLength - 1);
+            if(state.CurrentSorting == 0)
+                return true;
             return false;
         }
     }

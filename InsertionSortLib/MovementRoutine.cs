@@ -10,7 +10,6 @@ namespace InsertionSortLib {
             if(state.CurrentElement > 0 && state.Array[state.CurrentElement-1] > state.Temp) {
                 state.SetArrayValue(state.CurrentElement, state.Array[state.CurrentElement-1]);
                 state.SetCurrentElement(state.CurrentElement - 1);
-                
             }
             if(state.CurrentElement > 0 && state.Array[state.CurrentElement - 1] > state.Temp)
                 return true;
@@ -19,7 +18,6 @@ namespace InsertionSortLib {
 
         public override bool Backward(ref State state) {
             if(state.CurrentElement < state.CurrentSorting) {
-                
                 state.SetArrayValue(state.CurrentElement, state.Array[state.CurrentElement + 1]);
                 state.SetCurrentElement(state.CurrentElement + 1);
             }

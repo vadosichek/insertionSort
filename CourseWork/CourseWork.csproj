@@ -94,5 +94,11 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\InsertionSortLib\InsertionSortLib.csproj">
+      <Project>{47a2a55d-2fb3-4f33-a9ee-cac669835604}</Project>
+      <Name>InsertionSortLib</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

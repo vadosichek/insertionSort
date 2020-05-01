@@ -24,7 +24,10 @@ namespace InsertionSortLib {
         }
 
         public void SetCurrentSorting(int newCurrentSorting) {
-            CurrentSorting = newCurrentSorting;
+            if(newCurrentSorting < 0)
+                CurrentSorting = 0;
+            else
+                CurrentSorting = newCurrentSorting;
         }
 
         public void SetCurrentRoutine(int newCurrentRoutine) {
@@ -32,7 +35,10 @@ namespace InsertionSortLib {
         }
 
         public void SetCurrentElement(int newCurrentElement) {
-            CurrentElement = newCurrentElement;
+            if(newCurrentElement < 0)
+                CurrentElement = 0;
+            else
+                CurrentElement = newCurrentElement;
         }
 
         public void SetTemp(int newTemp) {
@@ -40,7 +46,10 @@ namespace InsertionSortLib {
         }
 
         public void SetSortedLenght(int newSortedLenght) {
-            SortedLength = newSortedLenght;
+            if(newSortedLenght < 0)
+                SortedLength = 0;
+            else
+                SortedLength = newSortedLenght;
         }
 
         public void SetArrayValue(int id, int value) {

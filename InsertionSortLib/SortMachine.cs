@@ -19,13 +19,17 @@ namespace InsertionSortLib {
         }
 
         public void Do() {
-            if(!RoutineList[_state.CurrentRoutine].Forward(ref _state)) {
-                IncrementCurrentRoutine();
+            if(!IsSorted()) {
+                if(!RoutineList[_state.CurrentRoutine].Forward(ref _state)) {
+                    IncrementCurrentRoutine();
+                }
             }
         }
         public void Undo() {
-            if(!RoutineList[_state.CurrentRoutine].Backward(ref _state)){
-                DecrementCurrentRoutine();
+            if(GetCurrentSorting() > 0) {
+                if(!RoutineList[_state.CurrentRoutine].Backward(ref _state)) {
+                    DecrementCurrentRoutine();
+                }
             }
         }
 
@@ -40,6 +44,16 @@ namespace InsertionSortLib {
 
         public bool IsSorted() => _state.Array.Length == _state.SortedLength;
         public bool IsUnsorted() => _state.SortedLength == 0;
+
+        public int[] GetArray() => _state.Array;
+
+        public int GetTemp() => _state.Temp;
+
+        public int GetCurrentElement() => _state.CurrentElement;
+
+        public int GetCurrentSorting() => _state.CurrentSorting;
+
+        public int GetSortedLength() => _state.SortedLength;
 
         public override string ToString() {
             return _state.ToString();

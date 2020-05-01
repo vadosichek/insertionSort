@@ -4,3 +4,9 @@ C:\Users\gurtle\source\repos\CourseWork\InsertionSortLib\obj\Debug\InsertionSort
 C:\Users\gurtle\source\repos\CourseWork\InsertionSortLib\obj\Debug\InsertionSortLib.csproj.CoreCompileInputs.cache
 C:\Users\gurtle\source\repos\CourseWork\InsertionSortLib\obj\Debug\InsertionSortLib.dll
 C:\Users\gurtle\source\repos\CourseWork\InsertionSortLib\obj\Debug\InsertionSortLib.pdb
+C:\Users\gurtle\Documents\insertionSort\InsertionSortLib\bin\Debug\InsertionSortLib.dll
+C:\Users\gurtle\Documents\insertionSort\InsertionSortLib\bin\Debug\InsertionSortLib.pdb
+C:\Users\gurtle\Documents\insertionSort\InsertionSortLib\obj\Debug\InsertionSortLib.csprojAssemblyReference.cache
+C:\Users\gurtle\Documents\insertionSort\InsertionSortLib\obj\Debug\InsertionSortLib.csproj.CoreCompileInputs.cache
+C:\Users\gurtle\Documents\insertionSort\InsertionSortLib\obj\Debug\InsertionSortLib.dll
+C:\Users\gurtle\Documents\insertionSort\InsertionSortLib\obj\Debug\InsertionSortLib.pdb
