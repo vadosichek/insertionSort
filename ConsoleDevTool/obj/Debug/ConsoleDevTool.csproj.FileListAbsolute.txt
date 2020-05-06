@@ -8,3 +8,13 @@ C:\Users\gurtle\source\repos\CourseWork\ConsoleDevTool\obj\Debug\ConsoleDevTool.
 C:\Users\gurtle\source\repos\CourseWork\ConsoleDevTool\obj\Debug\ConsoleDevTool.csproj.CopyComplete
 C:\Users\gurtle\source\repos\CourseWork\ConsoleDevTool\obj\Debug\ConsoleDevTool.exe
 C:\Users\gurtle\source\repos\CourseWork\ConsoleDevTool\obj\Debug\ConsoleDevTool.pdb
+C:\Users\gurtle\Documents\insertionSort\ConsoleDevTool\bin\Debug\ConsoleDevTool.exe.config
+C:\Users\gurtle\Documents\insertionSort\ConsoleDevTool\bin\Debug\ConsoleDevTool.exe
+C:\Users\gurtle\Documents\insertionSort\ConsoleDevTool\bin\Debug\ConsoleDevTool.pdb
+C:\Users\gurtle\Documents\insertionSort\ConsoleDevTool\bin\Debug\InsertionSortLib.dll
+C:\Users\gurtle\Documents\insertionSort\ConsoleDevTool\bin\Debug\InsertionSortLib.pdb
+C:\Users\gurtle\Documents\insertionSort\ConsoleDevTool\obj\Debug\ConsoleDevTool.csprojAssemblyReference.cache
+C:\Users\gurtle\Documents\insertionSort\ConsoleDevTool\obj\Debug\ConsoleDevTool.csproj.CoreCompileInputs.cache
+C:\Users\gurtle\Documents\insertionSort\ConsoleDevTool\obj\Debug\ConsoleDevTool.csproj.CopyComplete
+C:\Users\gurtle\Documents\insertionSort\ConsoleDevTool\obj\Debug\ConsoleDevTool.exe
+C:\Users\gurtle\Documents\insertionSort\ConsoleDevTool\obj\Debug\ConsoleDevTool.pdb

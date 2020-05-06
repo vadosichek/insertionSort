@@ -10,3 +10,6 @@ C:\Users\gurtle\Documents\insertionSort\InsertionSortLib\obj\Debug\InsertionSort
 C:\Users\gurtle\Documents\insertionSort\InsertionSortLib\obj\Debug\InsertionSortLib.csproj.CoreCompileInputs.cache
 C:\Users\gurtle\Documents\insertionSort\InsertionSortLib\obj\Debug\InsertionSortLib.dll
 C:\Users\gurtle\Documents\insertionSort\InsertionSortLib\obj\Debug\InsertionSortLib.pdb
+C:\Users\gurtle\Documents\insertionSort\InsertionSortLib\bin\Debug\Newtonsoft.Json.dll
+C:\Users\gurtle\Documents\insertionSort\InsertionSortLib\bin\Debug\Newtonsoft.Json.xml
+C:\Users\gurtle\Documents\insertionSort\InsertionSortLib\obj\Debug\InsertionSortLib.csproj.CopyComplete

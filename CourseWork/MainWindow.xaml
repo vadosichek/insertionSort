@@ -6,22 +6,25 @@
         xmlns:local="clr-namespace:CourseWork"
         xmlns:System="clr-namespace:System;assembly=mscorlib" x:Class="CourseWork.MainWindow"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
+        Title="MainWindow" Height="400" Width="800">
     <Grid>
-        <RichTextBox x:Name="CodeText" HorizontalAlignment="Left" Height="419" Margin="476,0,0,0" VerticalAlignment="Top" Width="316">
-            <FlowDocument>
-                <Paragraph>
-                    <Run Text="RichTextBox"/>
-                </Paragraph>
-            </FlowDocument>
-        </RichTextBox>
-        <Button x:Name="Backward" Content="&lt;" HorizontalAlignment="Left" Height="52" Margin="0,263,0,0" VerticalAlignment="Top" Width="238" Click="Backward_Click"/>
-        <Button x:Name="Forward" Content="&gt;" HorizontalAlignment="Left" Height="52" Margin="238,263,0,0" VerticalAlignment="Top" Width="238" Click="Forward_Click"/>
-        <Button x:Name="Fastforward" Content="&gt;&gt;" HorizontalAlignment="Left" Height="52" Margin="238,315,0,0" VerticalAlignment="Top" Width="238" Click="Fastforward_Click"/>
-        <Button x:Name="Load" Content="Load" HorizontalAlignment="Left" Height="52" Margin="0,367,0,0" VerticalAlignment="Top" Width="238" Click="Load_Click"/>
-        <Button x:Name="Reset" Content="Reset" HorizontalAlignment="Left" Height="52" Margin="238,367,0,0" VerticalAlignment="Top" Width="238" Click="Reset_Click"/>
-        <Slider x:Name="SpeedSlider" Margin="0,332,0,1" Width="238" HorizontalAlignment="Left" VerticalAlignment="Top"/>
-        <TextBlock x:Name="MessageText" HorizontalAlignment="Left" Height="52" Margin="0,211,0,0" TextWrapping="Wrap" Text="TextBlock" VerticalAlignment="Top" Width="476"/>
+        <Button x:Name="Backward" Content="&lt;" HorizontalAlignment="Left" Height="52" Margin="0,265,0,0" VerticalAlignment="Top" Width="238" Click="Backward_Click"/>
+        <Button x:Name="Forward" Content="&gt;" HorizontalAlignment="Left" Height="52" Margin="238,265,0,0" VerticalAlignment="Top" Width="238" Click="Forward_Click"/>
+        <Button x:Name="Fastforward" Content="&gt;&gt;" HorizontalAlignment="Left" Height="52" Margin="238,317,0,0" VerticalAlignment="Top" Width="238" Click="Fastforward_Click"/>
+        <Slider x:Name="SpeedSlider" Margin="9,334,0,0" Width="220" HorizontalAlignment="Left" VerticalAlignment="Top"/>
+        <TextBlock x:Name="MessageText" HorizontalAlignment="Left" Height="26" Margin="0,239,0,0" TextWrapping="Wrap" Text="TextBlock" VerticalAlignment="Top" Width="476"/>
         <Grid x:Name="ArrayGrid" Width="Auto" VerticalAlignment="Top" Margin="0,0,0,0" HorizontalAlignment="Left"/>
+        <TextBlock x:Name="TempText" HorizontalAlignment="Left" Height="26" Margin="0,213,0,0" TextWrapping="Wrap" Text="TextBlock" VerticalAlignment="Top" Width="476"/>
+        <TextBlock x:Name="CodeText" HorizontalAlignment="Left" Height="32" Margin="476,32,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="316"><Run Text="Псевдокод"/><Run Text=":"/></TextBlock>
+        <TextBlock x:Name="CodeTextBlock0" HorizontalAlignment="Left" Height="50" Margin="476,64,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="316"><Run Text="for i = 2 to n do "/><LineBreak/><Run Text="    temp = A[i]"/><LineBreak/><Run Text="    j = i - 1"/><LineBreak/><Run Text="    while (j &gt;= 1 and A[j-1] &gt; x) do "/><LineBreak/><Run Text="        A[j] = A[j-1]"/><LineBreak/><Run Text="        j = j - 1"/><LineBreak/><Run Text="    end while"/><LineBreak/><Run Text="    A[j] = x"/><LineBreak/><Run Text="end for"/></TextBlock>
+        <TextBlock x:Name="CodeTextBlock1" HorizontalAlignment="Left" Height="64" Margin="476,114,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="316"><Run Text="    while (j &gt; 0 and A[j] &gt; temp) do "/><LineBreak/><Run Text="        A[j+1] = A[j]"/><LineBreak/><Run Text="        j = j - 1"/><LineBreak/><Run Text="    end while"/></TextBlock>
+        <TextBlock x:Name="CodeTextBlock2" HorizontalAlignment="Left" Height="32" Margin="476,178,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="316"><Run Text="    A[j+1] = temp"/><LineBreak/><Run Text="end for"/></TextBlock>
+        <Menu HorizontalAlignment="Left" Height="20" VerticalAlignment="Top" Width="792">
+            <MenuItem Header="Набор данных">
+                <MenuItem x:Name="MenuItemCreate" Header="Создать"></MenuItem>
+                <MenuItem x:Name="MenuItemOpen" Header="Открыть" Click="MenuItemOpen_Click"></MenuItem>
+                <MenuItem x:Name="MenuItemSave" Header="Сохранить" Click="MenuItemSave_Click"></MenuItem>
+            </MenuItem>
+        </Menu>
     </Grid>
 </Window>

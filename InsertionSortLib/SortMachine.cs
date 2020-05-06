@@ -1,62 +1,89 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Newtonsoft.Json;
 
 namespace InsertionSortLib {
     public class SortMachine {
-        private State _state;
-        public Routine[] RoutineList { get; private set; } = {
-            new ForEachRoutine(), //routine 0
-            new SavePointerRoutine(), //routine 1
-            new MovementRoutine(), //routine 2
-            new InsertRoutine() //routine 3
-        };
+        private Preset preset;
+        private int currentState;
 
-        public SortMachine(int[] arrayToSort) {
-            _state = new State(arrayToSort, 0, 0, 0, 0);
+        public SortMachine() {
+            currentState = 0;
+        }
+
+        public void LoadPreset(Preset preset) {
+            currentState = 0;
+            this.preset = preset;
+        }
+
+        public void GeneratePreset(int[] array) {
+            currentState = 0;
+            preset = Sorter.GeneratePreset(array);
+        }
+
+        public string LoadPresetFromFile(string path) {
+            try {
+                using(StreamReader sw = new StreamReader(path)) {
+                    string input = sw.ReadToEnd();
+                    LoadPreset((Preset) JsonConvert.DeserializeObject(input, typeof(Preset)));
+                }
+                return null;
+            }
+            catch(Exception e) {
+                return e.Message;
+            }
+        }
+
+        public string SavePresetToFile(string path) {
+            try {
+                using(StreamWriter sw = new StreamWriter(path)) {
+                    string output = JsonConvert.SerializeObject(preset);
+                    sw.Write(output);
+                }
+                return null;
+            }
+            catch(Exception e) {
+                return e.Message;
+            }
         }
 
         public void Do() {
-            if(!IsSorted()) {
-                if(!RoutineList[_state.CurrentRoutine].Forward(ref _state)) {
-                    IncrementCurrentRoutine();
-                }
+            if(currentState < preset.GetStatesCount() - 1) {
+                currentState++;
             }
         }
         public void Undo() {
-            if(GetCurrentSorting() > 0) {
-                if(!RoutineList[_state.CurrentRoutine].Backward(ref _state)) {
-                    DecrementCurrentRoutine();
-                }
+            if(currentState > 0) {
+                currentState--;
             }
         }
 
-        private void IncrementCurrentRoutine() {
-            _state.SetCurrentRoutine((_state.CurrentRoutine + 1) % 4);
-        }
-        private void DecrementCurrentRoutine() {
-            _state.SetCurrentRoutine(_state.CurrentRoutine - 1 < 0 ? 3 : _state.CurrentRoutine - 1);
-        }
+        public State GetState()
+            => preset.GetState(currentState);
 
-        public State GetState() => _state;
+        public int[] GetArray()
+            => preset.GetState(currentState).Array;
 
-        public bool IsSorted() => _state.Array.Length == _state.SortedLength;
-        public bool IsUnsorted() => _state.SortedLength == 0;
+        public int GetTemp()
+            => preset.GetState(currentState).Temp;
 
-        public int[] GetArray() => _state.Array;
+        public int GetCurrentElement()
+            => preset.GetState(currentState).CurrentElement;
 
-        public int GetTemp() => _state.Temp;
+        public int GetCurrentSorting()
+            => preset.GetState(currentState).CurrentSorting;
 
-        public int GetCurrentElement() => _state.CurrentElement;
+        public int GetCurrentRoutine()
+            => preset.GetState(currentState).CurrentRoutine;
 
-        public int GetCurrentSorting() => _state.CurrentSorting;
+        public int GetSortedLength()
+            => preset.GetState(currentState).SortedLength;
 
-        public int GetSortedLength() => _state.SortedLength;
-
-        public override string ToString() {
-            return _state.ToString();
-        }
+        public override string ToString()
+            => preset.GetState(currentState).ToString();
     }
 }

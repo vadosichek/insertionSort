@@ -6,21 +6,25 @@ using System.Threading.Tasks;
 
 namespace InsertionSortLib {
     public class State {
-        public int[] Array { get; private set; }
-        public int CurrentRoutine { get; private set; }
-        public int CurrentElement { get; private set; }
-        public int CurrentSorting { get; private set; }
-        public int SortedLength { get; private set; }
-        public int Temp { get; private set; }
+        public int[] Array { get; set; }
+        public int CurrentRoutine { get; set; }
+        public int CurrentElement { get; set; }
+        public int CurrentSorting { get; set; }
+        public int SortedLength { get; set; }
+        public int Temp { get; set; }
 
+        public State() {
+
+        }
 
         public State(int[] Array, int CurrentRoutine, int CurrentElement, 
-                                        int CurrentSorting, int SortedLength) {
+                                        int CurrentSorting, int SortedLength, int Temp) {
             this.Array = Array;
             this.CurrentRoutine = CurrentRoutine;
             this.CurrentElement = CurrentElement;
             this.CurrentSorting = CurrentSorting;
             this.SortedLength = SortedLength;
+            this.Temp = Temp;
         }
 
         public void SetCurrentSorting(int newCurrentSorting) {
@@ -57,7 +61,7 @@ namespace InsertionSortLib {
         }
 
         public override string ToString() {
-            return $"{String.Join(" ", Array)} - sorting {CurrentSorting}, element {CurrentElement}, routine {CurrentRoutine}, temp {Temp}, sorted {SortedLength}";
+            return Commenter.Comment(this);
         }
 
     }
