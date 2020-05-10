@@ -1,18 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
 using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 using InsertionSortLib;
 using Microsoft.Win32;
 
@@ -25,82 +14,148 @@ namespace CourseWork {
         private SortMachine _sortMachine;
         private Button[] _arrayButtons;
         private Button _sortedArea;
+        private TextBlock[] CodeParts;
 
+        /// <summary>
+        /// Constructor
+        /// </summary>
         public MainWindow() {
             InitializeComponent();
             _sortMachine = new SortMachine();
-            //_sortMachine.GeneratePreset(new int[1]);
-            //CreateArrayVisual();
+            CodeParts = new TextBlock[3] { CodeTextBlock0,
+                                            CodeTextBlock1,
+                                            CodeTextBlock2};
         }
 
-        private void CreateArrayVisual() {
-            ArrayGrid.Children.Clear();
+        /// <summary>
+        /// Generates the visuals for current state of sort machine
+        /// </summary>
+        public void CreateArrayVisual() {
+            if(_sortMachine.Loaded) {
+                ClearVisual();
+                _arrayButtons = new Button[_sortMachine.GetArray().Length];
 
-            _arrayButtons = new Button[_sortMachine.GetArray().Length];
+                for(int i = 0; i < _sortMachine.GetArray().Length; i++) {
+                    CreateColumns();
+                    CreateButtons(i);
+                }
 
-            ArrayGrid.RowDefinitions.Add(new RowDefinition());
-            ArrayGrid.RowDefinitions.Add(new RowDefinition());
-            ArrayGrid.RowDefinitions.Add(new RowDefinition { Height = new GridLength(8) });
-
-            for(int i = 0; i < _sortMachine.GetArray().Length; i++) {
-                ColumnDefinition cd = new ColumnDefinition {
-                    MinWidth = 16,
-                    MaxWidth = 64
-                };
-                ArrayGrid.ColumnDefinitions.Add(cd);
-
-                Button tb = new Button();
-                _arrayButtons[i] = tb;
-                tb.Content = _sortMachine.GetArray()[i].ToString();
-
-                ArrayGrid.Children.Add(tb);
-                tb.SetValue(Grid.ColumnProperty, i);
-                tb.SetValue(Grid.RowProperty, 1);
-
-                tb = new Button();
-                tb.Content = i.ToString();
-
-                ArrayGrid.Children.Add(tb);
-                tb.SetValue(Grid.ColumnProperty, i);
-                tb.SetValue(Grid.RowProperty, 0);
+                CreateSortedArea();
+                PositionVisual();
+                ColorArrayVisual();
+                UpdateArrayText();
             }
+            else {
+                MessageText.Text = "Ошибка при загрузке данных";
+            }
+        }
 
+        /// <summary>
+        /// Clears the visuals
+        /// </summary>
+        private void ClearVisual() {
+            ArrayGrid.Children.Clear();
+            ArrayGrid.RowDefinitions.Add(new RowDefinition {
+                Height = new GridLength(20)
+            });
+            ArrayGrid.RowDefinitions.Add(new RowDefinition {
+                Height = new GridLength(20)
+            });
+            ArrayGrid.RowDefinitions.Add(new RowDefinition { 
+                Height = new GridLength(8) 
+            });
+        }
+
+        /// <summary>
+        /// Adds column definition
+        /// </summary>
+        private void CreateColumns() {
+            ColumnDefinition cd = new ColumnDefinition {
+                MinWidth = 16,
+                MaxWidth = 64
+            };
+            ArrayGrid.ColumnDefinitions.Add(cd);
+        }
+
+        /// <summary>
+        /// Adds the buttons
+        /// </summary>
+        /// <param name="i"></param>
+        private void CreateButtons(int i) {
+            Button tb = new Button();
+            _arrayButtons[i] = tb;
+            tb.Content = _sortMachine.GetArray()[i].ToString();
+
+            ArrayGrid.Children.Add(tb);
+            tb.SetValue(Grid.ColumnProperty, i);
+            tb.SetValue(Grid.RowProperty, 1);
+
+            tb = new Button();
+            tb.Content = (i + 1).ToString();
+
+            ArrayGrid.Children.Add(tb);
+            tb.SetValue(Grid.ColumnProperty, i);
+            tb.SetValue(Grid.RowProperty, 0);
+        }
+
+        /// <summary>
+        /// Adds green line under the array
+        /// </summary>
+        private void CreateSortedArea() {
             _sortedArea = new Button();
             ArrayGrid.Children.Add(_sortedArea);
             _sortedArea.SetValue(Grid.ColumnProperty, 0);
             _sortedArea.SetValue(Grid.RowProperty, 2);
             _sortedArea.SetValue(Grid.ColumnSpanProperty, 1);
             _sortedArea.Background = Brushes.Green;
+        }
 
-
+        /// <summary>
+        /// Position all the visuals in the center
+        /// </summary>
+        private void PositionVisual() {
             ArrayGrid.Measure(new Size(double.PositiveInfinity,
-                                        double.PositiveInfinity));
-            ArrayGrid.Arrange(new Rect(0, 0, 0, 0));
-            Thickness margin = ArrayGrid.Margin;
+                                            double.PositiveInfinity));
+            ArrayGrid.Arrange(new Rect(0, 0, 100, 100));
+            Thickness margin = new Thickness();
 
-            margin.Left = CodeText.Margin.Left / 2 - ArrayGrid.ActualWidth / 2;
-            margin.Top = TempText.Margin.Top / 2 - ArrayGrid.ActualHeight / 2;
+            double totalWidth = 0;
+            foreach(Button button in _arrayButtons) {
+                totalWidth += button.ActualWidth;
+            }
+
+            margin.Left = CodeText.Margin.Left / 2 - totalWidth / 2;
+            margin.Top = TempText.Margin.Top / 2 - 24;
             ArrayGrid.Margin = margin;
-
-            MessageText.Text = _sortMachine.ToString();
-
-            ColorArrayVisual();
-            UpdateArrayText();
         }
 
+        /// <summary>
+        /// Update visuals for current state of sort machine
+        /// </summary>
         private void UpdateArrayVisual() {
-            for(int i = 0; i < _sortMachine.GetArray().Length; i++)
-                _arrayButtons[i].Content = _sortMachine.GetArray()[i].ToString();
-            _sortedArea.SetValue(Grid.ColumnSpanProperty, _sortMachine.GetSortedLength() + 1);
-            ColorArrayVisual();
-            UpdateArrayText();
+            if(_sortMachine.Loaded) {
+                for(int i = 0; i < _sortMachine.GetArray().Length; i++)
+                    _arrayButtons[i].Content = _sortMachine.GetArray()[i].ToString();
+                _sortedArea.SetValue(Grid.ColumnSpanProperty, _sortMachine.GetSortedLength() + 1);
+                ColorArrayVisual();
+                UpdateArrayText();
+            }
+            else {
+                MessageText.Text = "Ошибка выполнения";
+            }
         }
 
+        /// <summary>
+        /// Update text blocks
+        /// </summary>
         public void UpdateArrayText() {
             MessageText.Text = _sortMachine.ToString();
             TempText.Text = $"Сохраненное значение: {_sortMachine.GetTemp()}";
         }
 
+        /// <summary>
+        /// Select color for buttons and code parts
+        /// </summary>
         private void ColorArrayVisual() {
             for(int i = 0; i < _sortMachine.GetArray().Length; i++) {
                 if(i == _sortMachine.GetCurrentSorting())
@@ -110,44 +165,57 @@ namespace CourseWork {
                 else
                     _arrayButtons[i].Background = Brushes.White;
             }
-            switch(_sortMachine.GetCurrentRoutine()) {
-                case 0:
-                    CodeTextBlock0.Background = Brushes.Yellow;
-                    CodeTextBlock1.Background = Brushes.White;
-                    CodeTextBlock2.Background = Brushes.White;
-                    break;
-                case 1:
-                    CodeTextBlock0.Background = Brushes.White;
-                    CodeTextBlock1.Background = Brushes.Yellow;
-                    CodeTextBlock2.Background = Brushes.White;
-                    break;
-                case 2:
-                    CodeTextBlock0.Background = Brushes.White;
-                    CodeTextBlock1.Background = Brushes.White;
-                    CodeTextBlock2.Background = Brushes.Yellow;
-                    break;
-                default:
-                    CodeTextBlock0.Background = Brushes.White;
-                    CodeTextBlock1.Background = Brushes.White;
-                    CodeTextBlock2.Background = Brushes.White;
-                    break;
+            ColorCode();
+        }
+
+        /// <summary>
+        /// Select color for code parts
+        /// </summary>
+        private void ColorCode() {
+            for(int i=0; i<CodeParts.Length; i++) {
+                if(i == _sortMachine.GetCurrentRoutine())
+                    CodeParts[i].Background = Brushes.Yellow;
+                else
+                    CodeParts[i].Background = Brushes.White;
             }
         }
 
+        /// <summary>
+        /// Backward button click - move backward
+        /// </summary>
+        /// <param name="sender">sender</param>
+        /// <param name="e">event args</param>
         private void Backward_Click(object sender, RoutedEventArgs e) {
-            _sortMachine.Undo();
+            if(_sortMachine.Loaded)
+                _sortMachine.Undo();
             UpdateArrayVisual();
         }
 
+        /// <summary>
+        /// Forward button click - move forward
+        /// </summary>
+        /// <param name="sender">sender</param>
+        /// <param name="e">event args</param>
         private void Forward_Click(object sender, RoutedEventArgs e) {
-            _sortMachine.Do();
+            if(_sortMachine.Loaded)
+                _sortMachine.Do();
             UpdateArrayVisual();
         }
 
+        /// <summary>
+        /// Fastforward button click - move forward automatically
+        /// </summary>
+        /// <param name="sender">sender</param>
+        /// <param name="e">event args</param>
         private void Fastforward_Click(object sender, RoutedEventArgs e) {
 
         }
 
+        /// <summary>
+        /// Save button click - save preset to file
+        /// </summary>
+        /// <param name="sender">sender</param>
+        /// <param name="e">event args</param>
         private void MenuItemSave_Click(object sender, RoutedEventArgs e) {
             SaveFileDialog fileDialog = new SaveFileDialog();
             fileDialog.Filter = "Preset file|*.ps";
@@ -156,10 +224,17 @@ namespace CourseWork {
             Nullable<bool> dialogResult = fileDialog.ShowDialog();
             if(dialogResult == true) {
                 string path = fileDialog.FileName;
-                _sortMachine.SavePresetToFile(path);
+                string res = _sortMachine.SavePresetToFile(path);
+                if(res != null)
+                    MessageText.Text = res;
             }
         }
 
+        /// <summary>
+        /// Open button click - open preset file
+        /// </summary>
+        /// <param name="sender">sender</param>
+        /// <param name="e">event args</param>
         private void MenuItemOpen_Click(object sender, RoutedEventArgs e) {
             OpenFileDialog fileDialog = new OpenFileDialog();
             fileDialog.Multiselect = false;
@@ -168,9 +243,25 @@ namespace CourseWork {
             Nullable<bool> dialogResult = fileDialog.ShowDialog();
             if(dialogResult == true) {
                 string path = fileDialog.FileName;
-                _sortMachine.LoadPresetFromFile(path);
-                CreateArrayVisual();
+                string res = _sortMachine.LoadPresetFromFile(path);
+                if(res != null)
+                    MessageText.Text = res;
+                else {
+                    CreateArrayVisual();
+                }
             }
+        }
+
+        /// <summary>
+        /// Create button click - create new preset
+        /// </summary>
+        /// <param name="sender">sender</param>
+        /// <param name="e">event args</param>
+        private void MenuItemCreate_Click(object sender, RoutedEventArgs e) {
+            InputWindow inputWindow = new InputWindow();
+            inputWindow.SetSortMachine(_sortMachine);
+            inputWindow.SetMainWindow(this);
+            inputWindow.Show();
         }
     }
 }

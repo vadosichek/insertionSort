@@ -18,3 +18,5 @@ C:\Users\gurtle\Documents\insertionSort\CourseWork\bin\Debug\InsertionSortLib.pd
 C:\Users\gurtle\Documents\insertionSort\CourseWork\obj\Debug\CourseWork.csproj.CopyComplete
 C:\Users\gurtle\Documents\insertionSort\CourseWork\bin\Debug\Newtonsoft.Json.dll
 C:\Users\gurtle\Documents\insertionSort\CourseWork\bin\Debug\Newtonsoft.Json.xml
+C:\Users\gurtle\Documents\insertionSort\CourseWork\obj\Debug\InputWindow.g.cs
+C:\Users\gurtle\Documents\insertionSort\CourseWork\obj\Debug\InputWindow.baml

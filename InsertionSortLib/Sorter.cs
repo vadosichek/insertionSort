@@ -1,11 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace InsertionSortLib {
+﻿namespace InsertionSortLib {
     public class Sorter {
+
+        /// <summary>
+        /// Generate preset from array
+        /// </summary>
+        /// <param name="array">array to generate from</param>
+        /// <returns>generated preset</returns>
         public static Preset GeneratePreset(int[] array) {
             Preset preset = new Preset();
             Sort(array, ref preset);
@@ -13,6 +13,11 @@ namespace InsertionSortLib {
             return preset;
         }
 
+        /// <summary>
+        /// Sort array to generate preset
+        /// </summary>
+        /// <param name="array">array to sort</param>
+        /// <param name="preset">preset to save to</param>
         private static void Sort(int[] array, ref Preset preset) {
             int temp;
             int pointer;
@@ -28,6 +33,14 @@ namespace InsertionSortLib {
                 3, array.Length-1, array.Length - 1, array.Length - 1, 0));
         }
 
+        /// <summary>
+        /// Prepare the first cell
+        /// </summary>
+        /// <param name="array">array to work in</param>
+        /// <param name="i">current sorting</param>
+        /// <param name="temp">saved value</param>
+        /// <param name="pointer">current element</param>
+        /// <param name="preset">preset to save to</param>
         private static void MovePointer(int[] array, int i, int temp,
             out int pointer, ref Preset preset) {
             for(pointer = i - 1;
@@ -39,6 +52,14 @@ namespace InsertionSortLib {
             }
         }
 
+        /// <summary>
+        /// Insert saved value into the first cell
+        /// </summary>
+        /// <param name="array">array to work in</param>
+        /// <param name="i">current sorting</param>
+        /// <param name="pointer">current element</param>
+        /// <param name="temp">saved value</param>
+        /// <param name="preset">preset to save to</param>
         private static void Insert(int[] array, int i, int pointer, int temp, ref Preset preset) {
             array[pointer + 1] = temp;
             preset.AddState(new State((int[]) array.Clone(), 
