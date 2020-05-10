@@ -2,6 +2,7 @@
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
+using System.Windows.Threading;
 using InsertionSortLib;
 using Microsoft.Win32;
 
@@ -15,6 +16,8 @@ namespace CourseWork {
         private Button[] _arrayButtons;
         private Button _sortedArea;
         private TextBlock[] CodeParts;
+        private bool IsPlaying;
+        DispatcherTimer dispatcherTimer;
 
         /// <summary>
         /// Constructor
@@ -25,6 +28,8 @@ namespace CourseWork {
             CodeParts = new TextBlock[3] { CodeTextBlock0,
                                             CodeTextBlock1,
                                             CodeTextBlock2};
+            dispatcherTimer = new DispatcherTimer();
+            dispatcherTimer.Tick += FastForwardTick;
         }
 
         /// <summary>
@@ -61,8 +66,8 @@ namespace CourseWork {
             ArrayGrid.RowDefinitions.Add(new RowDefinition {
                 Height = new GridLength(20)
             });
-            ArrayGrid.RowDefinitions.Add(new RowDefinition { 
-                Height = new GridLength(8) 
+            ArrayGrid.RowDefinitions.Add(new RowDefinition {
+                Height = new GridLength(8)
             });
         }
 
@@ -172,7 +177,7 @@ namespace CourseWork {
         /// Select color for code parts
         /// </summary>
         private void ColorCode() {
-            for(int i=0; i<CodeParts.Length; i++) {
+            for(int i = 0; i < CodeParts.Length; i++) {
                 if(i == _sortMachine.GetCurrentRoutine())
                     CodeParts[i].Background = Brushes.Yellow;
                 else
@@ -192,14 +197,73 @@ namespace CourseWork {
         }
 
         /// <summary>
+        /// Move to the next state
+        /// </summary>
+        private void MoveForward() {
+            if(_sortMachine.Loaded)
+                _sortMachine.Do();
+            UpdateArrayVisual();
+        }
+
+        /// <summary>
         /// Forward button click - move forward
         /// </summary>
         /// <param name="sender">sender</param>
         /// <param name="e">event args</param>
         private void Forward_Click(object sender, RoutedEventArgs e) {
-            if(_sortMachine.Loaded)
-                _sortMachine.Do();
-            UpdateArrayVisual();
+            MoveForward();
+        }
+
+        /// <summary>
+        /// Fast forward tick - move forward
+        /// </summary>
+        /// <param name="sender">sender</param>
+        /// <param name="e">event args</param>
+        private void FastForwardTick(object sender, EventArgs e) {
+            if(_sortMachine.GetCurrentRoutine() != 3)
+                MoveForward();
+            else {
+                StopFastForward();
+            }
+        }
+
+        /// <summary>
+        /// Stops fast forward
+        /// </summary>
+        private void StopFastForward() {
+            IsPlaying = false;
+            Fastforward.Content = ">>";
+            dispatcherTimer.Stop();
+        }
+
+        /// <summary>
+        /// Start fast forward
+        /// </summary>
+        private void StartFastForward() {
+            IsPlaying = true;
+            Fastforward.Content = "стоп";
+            UpdateSpeed();
+            dispatcherTimer.Start();
+        }
+
+        /// <summary>
+        /// Update fast forward speed
+        /// </summary>
+        private void UpdateSpeed() {
+            if(dispatcherTimer != null) {
+                int seconds = (int) SpeedSlider.Value;
+                int milliseconds = (int) ((SpeedSlider.Value - (int) SpeedSlider.Value)*10);
+                dispatcherTimer.Interval = new TimeSpan(0, 0, 0, seconds, milliseconds);
+            }
+        }
+
+        /// <summary>
+        /// Speed slider value changed
+        /// </summary>
+        /// <param name="sender">sender</param>
+        /// <param name="e">event args</param>
+        private void SpeedSlider_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e) {
+            UpdateSpeed();
         }
 
         /// <summary>
@@ -208,7 +272,14 @@ namespace CourseWork {
         /// <param name="sender">sender</param>
         /// <param name="e">event args</param>
         private void Fastforward_Click(object sender, RoutedEventArgs e) {
-
+            if(_sortMachine.Loaded) {
+                if(IsPlaying) {
+                    StopFastForward();
+                }
+                else {
+                    StartFastForward();
+                }
+            }
         }
 
         /// <summary>
@@ -263,5 +334,7 @@ namespace CourseWork {
             inputWindow.SetMainWindow(this);
             inputWindow.Show();
         }
+
+        
     }
 }

@@ -10,7 +10,7 @@
         <Button x:Name="Backward" Content="&lt;" HorizontalAlignment="Left" Height="52" Margin="0,265,0,0" VerticalAlignment="Top" Width="238" Click="Backward_Click"/>
         <Button x:Name="Forward" Content="&gt;" HorizontalAlignment="Left" Height="52" Margin="238,265,0,0" VerticalAlignment="Top" Width="238" Click="Forward_Click"/>
         <Button x:Name="Fastforward" Content="&gt;&gt;" HorizontalAlignment="Left" Height="52" Margin="238,317,0,0" VerticalAlignment="Top" Width="238" Click="Fastforward_Click"/>
-        <Slider x:Name="SpeedSlider" Margin="9,334,0,0" Width="220" HorizontalAlignment="Left" VerticalAlignment="Top"/>
+        <Slider x:Name="SpeedSlider" Margin="9,334,0,0" Width="220" HorizontalAlignment="Left" VerticalAlignment="Top" Maximum="5" ValueChanged="SpeedSlider_ValueChanged" Minimum="0.999"/>
         <TextBlock x:Name="MessageText" HorizontalAlignment="Left" Height="26" Margin="0,239,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="476"/>
         <Grid x:Name="ArrayGrid" Width="Auto" VerticalAlignment="Top" Margin="0,0,0,0" HorizontalAlignment="Left"/>
         <TextBlock x:Name="TempText" HorizontalAlignment="Left" Height="26" Margin="0,213,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="476"/>
