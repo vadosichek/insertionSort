@@ -13,7 +13,6 @@ namespace CourseWork {
         /// </summary>
         public InputWindow() {
             InitializeComponent();
-            ErrorText.Visibility = Visibility.Hidden;
         }
 
         /// <summary>
@@ -39,13 +38,22 @@ namespace CourseWork {
         /// <param name="e">event args</param>
         private void Proceed_Click(object sender, RoutedEventArgs e) {
             string input = InputText.Text;
-            input = input.Replace(" ","");
+            input = input.Replace(" ", "");
             string[] data = input.Split(',');
+            if(data.Length > 10) {
+                ShowErrorMessage();
+                return;
+            }
+
             List<int> array = new List<int>();
             foreach(string text in data) {
                 int temp;
                 if(!int.TryParse(text, out temp)) {
-                    ErrorText.Visibility = Visibility.Visible;
+                    ShowErrorMessage();
+                    return;
+                }
+                if(temp > 10000 || temp < -9999) {
+                    ShowErrorMessage();
                     return;
                 }
                 array.Add(temp);
@@ -53,6 +61,10 @@ namespace CourseWork {
             _sortMachine.GeneratePreset(array.ToArray());
             _mainWindow.CreateArrayVisual();
             this.Close();
+        }
+
+        private void ShowErrorMessage() {
+            ErrorText.Text = "Некорректные данные";
         }
     }
 }
