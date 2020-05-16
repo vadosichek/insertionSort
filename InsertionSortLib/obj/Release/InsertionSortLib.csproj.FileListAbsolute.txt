@@ -1,0 +1,9 @@
+C:\Users\gurtle\Documents\insertionSort\InsertionSortLib\bin\Release\InsertionSortLib.dll
+C:\Users\gurtle\Documents\insertionSort\InsertionSortLib\bin\Release\InsertionSortLib.pdb
+C:\Users\gurtle\Documents\insertionSort\InsertionSortLib\bin\Release\Newtonsoft.Json.dll
+C:\Users\gurtle\Documents\insertionSort\InsertionSortLib\bin\Release\Newtonsoft.Json.xml
+C:\Users\gurtle\Documents\insertionSort\InsertionSortLib\obj\Release\InsertionSortLib.csprojAssemblyReference.cache
+C:\Users\gurtle\Documents\insertionSort\InsertionSortLib\obj\Release\InsertionSortLib.csproj.CoreCompileInputs.cache
+C:\Users\gurtle\Documents\insertionSort\InsertionSortLib\obj\Release\InsertionSortLib.csproj.CopyComplete
+C:\Users\gurtle\Documents\insertionSort\InsertionSortLib\obj\Release\InsertionSortLib.dll
+C:\Users\gurtle\Documents\insertionSort\InsertionSortLib\obj\Release\InsertionSortLib.pdb

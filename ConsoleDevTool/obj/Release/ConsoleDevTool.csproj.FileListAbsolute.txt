@@ -1,0 +1,12 @@
+C:\Users\gurtle\Documents\insertionSort\ConsoleDevTool\bin\Release\ConsoleDevTool.exe.config
+C:\Users\gurtle\Documents\insertionSort\ConsoleDevTool\bin\Release\ConsoleDevTool.exe
+C:\Users\gurtle\Documents\insertionSort\ConsoleDevTool\bin\Release\ConsoleDevTool.pdb
+C:\Users\gurtle\Documents\insertionSort\ConsoleDevTool\bin\Release\InsertionSortLib.dll
+C:\Users\gurtle\Documents\insertionSort\ConsoleDevTool\bin\Release\Newtonsoft.Json.dll
+C:\Users\gurtle\Documents\insertionSort\ConsoleDevTool\bin\Release\InsertionSortLib.pdb
+C:\Users\gurtle\Documents\insertionSort\ConsoleDevTool\bin\Release\Newtonsoft.Json.xml
+C:\Users\gurtle\Documents\insertionSort\ConsoleDevTool\obj\Release\ConsoleDevTool.csprojAssemblyReference.cache
+C:\Users\gurtle\Documents\insertionSort\ConsoleDevTool\obj\Release\ConsoleDevTool.csproj.CoreCompileInputs.cache
+C:\Users\gurtle\Documents\insertionSort\ConsoleDevTool\obj\Release\ConsoleDevTool.csproj.CopyComplete
+C:\Users\gurtle\Documents\insertionSort\ConsoleDevTool\obj\Release\ConsoleDevTool.exe
+C:\Users\gurtle\Documents\insertionSort\ConsoleDevTool\obj\Release\ConsoleDevTool.pdb
